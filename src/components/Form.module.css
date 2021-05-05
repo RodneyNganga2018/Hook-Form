@@ -1,0 +1,47 @@
+.formGroup {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px 10px;
+    max-width: 500px;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 1px 1px black;
+}
+
+.formLabel {
+    width: 30%;
+}
+
+.formInput {
+    width: 70%;
+    height: 50%;
+}
+
+.formSubmit {
+    margin-left: 35%;
+    padding: 10px;
+    border-radius: 5px 5px;
+    border: 0 solid black;
+    box-shadow: 2px 2px black;
+    background-color: antiquewhite;
+    cursor: pointer;
+}
+
+.userFormGroup {
+    padding: 0 15px;
+    max-width: 500px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.userFormLabel {
+    width: 30%;
+}
+
+.userFormInput {
+    width: 70%;
+    height: 50%;
+}
