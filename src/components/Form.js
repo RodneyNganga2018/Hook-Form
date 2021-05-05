@@ -7,7 +7,12 @@ const Form = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [cpassword, setCpassword] = useState("");
-    const [validation, setValidation] = useState("");
+    const [validfirstname, setValidfirstname] = useState("");
+    const [error, setError] = useState(false);
+    const [validlastname, setValidlastname] = useState("");
+    const [validemail, setValidemail] = useState("");
+    const [validpassword, setValidpassword] = useState("");
+    const [validcpassword, setValidcpassword] = useState("");
     const [newuser, setNewuser] = useState({
         firstname: "",
         lastname: "",
@@ -18,16 +23,54 @@ const Form = (props) => {
 
     const processForm = (e) => {
         e.preventDefault();
-        if (password === cpassword) {
-            setNewuser({ firstname, lastname, email, password, cpassword}) 
-            setValidation("");
+
+        if (firstname.length<2 && firstname.length!=0) {
+            setValidfirstname("First name must be at least 2 characters")
+            setError(true);
+        } else {
+            setValidfirstname("");
+            setError(false);
+        }
+        
+        if (lastname.length<2 && lastname.length!=0) {
+            setValidlastname("Last name must be at least 2 characters");
+            setError(true);
+        } else {
+            setValidlastname("")
+            setError(false);
+        }
+
+        if (email.length<5 && email.length!=0) {
+            setValidemail("Email must be at least 5 characters") 
+            setError(true);
+        } else {
+            setValidemail("")
+            setError(false);
+        }
+
+        if (password.length<8 && password.length!=0) {
+            setValidpassword("Password must be at least 8 characters")
+            setError(true);
+        } else {
+            setValidpassword("")
+            setError(false);
+        }
+        
+        if (password!=cpassword) {
+            setValidcpassword("Passwords must match");
+            setError(true);
+        } else {
+            setValidcpassword("")
+            setError(false);
+        }
+
+        if (error==false) {
+            setNewuser({ firstname, lastname, email, password, cpassword})
             setFirstname("");
             setLastname("");
             setEmail("");
             setPassword("");
             setCpassword("");
-        } else {
-            setValidation("Passwords do not match!");
         }
     }
 
@@ -38,23 +81,27 @@ const Form = (props) => {
                     <label className={styles.formLabel}>First Name: </label>
                     <input className={styles.formInput} type="text" onChange={ (e) => setFirstname(e.target.value) } value={ firstname }/>
                 </div>
+                { validfirstname? <p style={{color:'red'}}>{validfirstname}</p>: '' }
                 <div className={styles.formGroup}>
                     <label className={styles.formLabel}>Last Name: </label>
                     <input className={styles.formInput} type="text" onChange={ (e) => setLastname(e.target.value) } value={ lastname }/>
                 </div>
+                { validlastname? <p style={{color:'red'}}>{validlastname}</p>: '' }
                 <div className={styles.formGroup}>
                     <label className={styles.formLabel}>Email: </label>
                     <input className={styles.formInput} type="text" onChange={ (e) => setEmail(e.target.value) } value={ email }/>
                 </div>
+                { validemail? <p style={{color:'red'}}>{validemail}</p>: '' }
                 <div className={styles.formGroup}>
                     <label className={styles.formLabel}>Password: </label>
                     <input className={styles.formInput} type="password" onChange={ (e) => setPassword(e.target.value) } value={ password }/>
                 </div>
+                { validpassword? <p style={{color:'red'}}>{validpassword}</p>: '' }
+                { validcpassword? <p style={{color:'red'}}>{validcpassword}</p>: '' }
                 <div className={styles.formGroup}>
                     <label className={styles.formLabel}>Confirm Password: </label>
                     <input className={styles.formInput} type="password" onChange={ (e) => setCpassword(e.target.value) } value={ cpassword }/>
                 </div>
-                <p>{ validation }</p>
                 <input className={styles.formSubmit} type="submit" value="Submit Form"/>
             </form>
             <div>
